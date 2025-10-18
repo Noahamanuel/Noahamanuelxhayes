@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Hayes 🎂</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff5f8, #ffe6f0);
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    text-align: center;
+    padding: 3rem 1rem 5rem 1rem;
+    color: #d86a8b;
+  }
+
+  header h1 {
+    font-size: 3rem;
+    margin: 0;
+    animation: fadeInDown 2s ease;
+    position: relative;
+  }
+
+  /* Crown Animation */
+  .crown {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 50px;
+    background: gold;
+    clip-path: polygon(0% 100%, 15% 40%, 30% 100%, 45% 40%, 60% 100%, 75% 40%, 90% 100%, 100% 40%, 100% 100%, 0% 100%);
+    animation: sparkle 1.5s infinite alternate;
+    z-index: 2;
+  }
+
+  @keyframes sparkle {
+    0% { filter: brightness(1); transform: translateX(-50%) scale(1); }
+    50% { filter: brightness(1.8); transform: translateX(-50%) scale(1.1); }
+    100% { filter: brightness(1); transform: translateX(-50%) scale(1); }
+  }
+
+  /* Sections */
+  section {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+  }
+
+  section.reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h2 {
+    color: #94415f;
+    font-weight: 400;
+  }
+
+  /* Button */
+  button {
+    margin-top: 2rem;
+    padding: 0.8rem 1.8rem;
+    background: #d86a8b;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    background: #c15f7e;
+    transform: scale(1.05);
+  }
+
+  .message {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #94415f;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #ffd6e0;
+    top: 0;
+    left: 50%;
+    pointer-events: none;
+    opacity: 0.7;
+    animation: confettiFall linear infinite;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+  }
+
+  @keyframes fadeInDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crown"></div>
+  <h1>🎀 Happy Birthday, Hayes! 🎀</h1>
+</header>
+
+<section>
+  <h2>Wishing you a day full of love, laughter, and all the sparkle you bring to everyone’s life ✨</h2>
+</section>
+
+<section>
+  <button onclick="showMessage()">💌 Click for a Surprise</button>
+  <div id="message" class="message"></div>
+</section>
+
+
+<script>
+ // Scroll Reveal + reveal on load
+const sections = document.querySelectorAll('section');
+
+function revealSections() {
+  const triggerBottom = window.innerHeight / 5 * 4;
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    if(sectionTop < triggerBottom) {
+      section.classList.add('reveal');
+    }
+  });
+}
+
+// Reveal on load
+window.addEventListener('load', revealSections);
+// Reveal on scroll
+window.addEventListener('scroll', revealSections);
+
+
+  // Surprise message
+  function showMessage() {
+    const msg = document.getElementById('message');
+    msg.innerHTML = "HAPPY BIRTHDAY, HAYES!    Today is ur special day, and its all abt celebrating the amazing person u r! Frome your laughter that lights up every room to the little things that make u the most u uniquely you, you deserve a day full of joy, suprises, and love. May this yr bring u unforgettable adventures, endless smiles, and all the happinees in the world, Thank u for being such a wonderful friend,     here's to more fun, laughter, and memories together. You're simply the best!";
+  }
+
+  // Confetti generator
+  function createConfetti() {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.left = Math.random() * window.innerWidth + 'px';
+    confetti.style.background = `hsl(${Math.random()*360}, 70%, 80%)`;
+    confetti.style.width = confetti.style.height = Math.random()*8 + 5 + 'px';
+    confetti.style.animationDuration = Math.random()*3 + 2 + 's';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 5000);
+  }
+  setInterval(createConfetti, 200);
+</script>
+
+</body>
+</html>
